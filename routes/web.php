@@ -29,4 +29,14 @@ Route::get('/test',function (){
 });
 Route::get('/missions','Missions@index');
 Route::get('/missions/valider/{id}','Missions@valider');
+Route::get('/paiement-frais','Missions@paiement_index');
+Route::get('/paiement-frais/payer/{id}','Missions@valider_paiement');
+Route::get('/settings', function (){
+    return view('settings');
+});
+Route::get('/settings/distances', function (){
+    return view('settings-distances');
+});
+Route::get('/settings/prix', 'Settings@prixKilometre');
+Route::post('/settings/prix/modify', 'Settings@modify');
 ?>
