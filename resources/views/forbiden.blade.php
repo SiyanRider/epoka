@@ -16,13 +16,7 @@
             
         <div class="authpanel">
           
-            Veuillez vous connecter<br><br>
-            <form method="POST" action="/login">
-            @csrf
-                Login :    <input type="text" class="fields" required maxlenght=10 name='login'><br/>
-                Password : <input type="password" class="fields" required maxlenght=10 name='passwd'><br/>
-                <br><input type="submit" value="Se connecter">
-            </form>
+            ERREUR : vous n'êtes pas autorisé.
         </div>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

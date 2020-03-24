@@ -7,6 +7,22 @@ use DB;
 
 class Settings extends Controller
 {
+    public function index(){
+        session_start();
+        if (isset($_SESSION['login'])){
+            if ($_SESSION['view_paiements'] == '1'){
+                return view('settings');
+            }
+            else{
+                header('Location: /forbiden-error');
+                exit();
+            }
+        }
+        else{
+            header('Location /');
+            exit();
+        }
+    }
     public function prixKilometre (){
         session_start();
         if (isset($_SESSION['login'])){

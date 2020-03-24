@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\User;
+use Illuminate\Database\Eloquent\Model;
+use App\SqlQueries as SqlQueries;
 use DB;
 
 class Missions extends Controller
@@ -10,8 +12,14 @@ class Missions extends Controller
     public function index(){
         session_start();
         if (isset($_SESSION['login'])){
-            $liste_missions = DB::select('SELECT user_nom, user_prenom, miss_debut, miss_fin, ville_nom_reel, miss_id, isValidate FROM mission, utilisateurs, villes_france_free WHERE miss_ville_id = ville_id AND mission.user_id = utilisateurs.user_id');
-            return view('missions', compact('liste_missions'));
+            if ($_SESSION['view_missions'] = 1){
+                $liste_missions = SqlQueries::getMissions();
+                return view('missions', compact('liste_missions'));
+            }
+            else{
+                header('Location: /forbiden-error');
+                exit();
+            }
         }
         else{
             header('Location: /');
@@ -21,32 +29,40 @@ class Missions extends Controller
     public function valider($id){
         session_start();
         if (isset($_SESSION['login'])){
-            DB::table('mission')
-                ->where('miss_id',$id)
-                ->update(['isValidate' => 1]);
-            header('Location: /missions');
-            exit();
+            if ($_SESSION['view_missions'] = 1){
+                SqlQueries::validateMission($id);
+                header('Location: /missions');
+                exit();
+            }
         }
     }
     public function paiement_index(){
         session_start();
         if (isset($_SESSION['login'])){
-            $liste_missions = DB::select('SELECT user_nom, user_prenom, miss_debut, miss_fin, ville_nom_reel, miss_id, isValidate FROM mission, utilisateurs, villes_france_free WHERE miss_ville_id = ville_id AND mission.user_id = utilisateurs.user_id AND isValidate = 1');
-            return view('paiement-frais', compact('liste_missions'));
+            if ($_SESSION['view_paiements'] == '1'){
+                $liste_missions = SqlQueries::getPaiements();
+                return view('paiement-frais', compact('liste_missions'));
+            }
+            else{
+                header('Location: /forbiden-error');
+                exit();
+            }
+            
+            }
+            else{
+                header('Location: /');
+                exit();
         }
-        else{
-            header('Location: /');
-            exit();
-        }
+        
     }
     public function valider_paiement($id){
         session_start();
         if (isset($_SESSION['login'])){
-            DB::table('mission')
-                ->where('miss_id',$id)
-                ->update(['isRembour' => 1]);
-            header('Location: /paiement-frais');
-            exit();
+            if ($_SESSION['view_paiements'] =='1'){
+                SqlQueries::validatePaiement($id);
+                header('Location: /paiement-frais');
+                exit();
+            }
         }
     }
 }

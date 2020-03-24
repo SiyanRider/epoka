@@ -4,34 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/styles.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
     <title>Validations des missions | Epoka</title>
 </head>
 <body class="sb-nav-fixed">
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand" href="/">EPOKA</a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
-            </nav>
-            <div id="layoutSidenav">
-            <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                    <div class="sb-sidenav-menu">
-                        <div class="nav">
-                                <a href="#">Validation des missions</a>
-                                <a href="/paiement-frais">Paiement des frais</a>
-                                <a href="settings">Paramétrage</a>
-                                <a href="/disconnect">Déconnexion</a>
-                            </div>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-            <div class="card-header">
-            <svg class="svg-inline--fa fa-table fa-w-16 mr-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="table" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM224 416H64v-96h160v96zm0-160H64v-96h160v96zm224 160H288v-96h160v96zm0-160H288v-96h160v96z"></path>lol</svg>
-        
-            
-        </div>
+            <a class="navbar-brand" href="/">EPOKA</a>
+            <div class="menu">
+                                @if ($_SESSION['view_missions'] == '1')
+                                <a href="/missions" class="active"><img src="check.png" width="32" /> Validation des missions</a>
+                                @endif
+                                @if ($_SESSION['view_paiements'] == '1')
+                                <a href="/paiement-frais" ><img src="money.png" width="32" /> Paiement des frais</a>
+                                <a href="/settings"><img src="settings.png" width="32"/> Paramétrage</a>
+                                @endif
+                                <span class="logout">Connecté en tant que {{ $_SESSION['nom'] }} <a href="/disconnect"> <img src="logout.png" width="32"/>  Déconnexion</a></span>
+</div>
+        </nav>
+               
         <div class="card-body">
+        <br/><br/><br/>
         <center>Validation des missions de vos subordonés :</center>
             <div class="table-responsive">
                 <div class="row">
@@ -70,6 +64,7 @@
 </div>
 </div>
 </div>
+</div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
@@ -79,5 +74,6 @@
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
         <script src="assets/demo/datatables-demo.js"></script>
+
 </body>
 </html>

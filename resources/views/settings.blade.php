@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/styles.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
     <title>Paramètrage distance</title>
@@ -16,18 +17,21 @@
                                 <a href="/missions"><img src="check.png" width="32" /> Validation des missions</a>
                                 @endif
                                 @if ($_SESSION['view_paiements'] == '1')
-                                <a href="/paiement-frais" class="active"><img src="money.png" width="32" /> Paiement des frais</a>
-                                <a href="/settings"><img src="settings.png" width="32"/> Paramétrage</a>
+                                <a href="/paiement-frais" ><img src="money.png" width="32" /> Paiement des frais</a>
+                                <a href="/settings" class="active"><img src="settings.png" width="32"/> Paramétrage</a>
                                 @endif
                                 <span class="logout">Connecté en tant que {{ $_SESSION['nom'] }} <a href="/disconnect"> <img src="logout.png" width="32"/>  Déconnexion</a></span>
 </div>
         </nav>
-                </div>
-            </div>
         <div class="card-body">
         <br/><br/><br/>
-Paramètrage distance entre deux villes :
+<div class="authpanel">
+    <img src="distance.png" height="150" /><a href="distance" class="active">Parametrez la distance entres deux villes</a>
 </div>
+<div class="authpanel">
+    <img src="prix.png" width="200" height="200" /><a href="prix" class="active">Parametrez les indemnités</a>
+</div>
+        </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>

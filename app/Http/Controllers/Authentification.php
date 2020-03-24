@@ -18,8 +18,17 @@ public function connect()
             if ($passwd == $password){
                 session_start();
                 $_SESSION['login'] = $login;
-                header('Location: /missions');
-                exit();
+                $_SESSION['view_missions'] = $user->view_missions;
+                $_SESSION['view_paiements'] = $user->view_paiements;
+                $_SESSION['nom'] = $user->user_nom.' '.$user->user_prenom;
+                if ($_SESSION['view_missions'] == '1' ){
+                    header('Location: /missions');
+                    exit();
+                }
+                if ($_SESSION['view_paiements'] == '1'){
+                    header('Location: /paiement-frais');
+                    exit();
+                }
             }
             else{
                 header('Location: /');
@@ -32,15 +41,5 @@ public function connect()
         }
     
     }
-public function isSignIn(){
-    session_start();
-    if (isset($_SESSION['login'])){
-        return view(Route::currentRouteName());
-    }
-    else{
-        header('Location: /');
-        exit();
-    }
-}
 }
 ?>

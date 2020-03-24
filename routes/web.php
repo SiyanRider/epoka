@@ -13,6 +13,9 @@
 Route::get('/', function() {
     return view('auth');
 });
+Route::get('/forbiden-error', function(){
+    return view('forbiden');
+});
 Route::post('/login','Authentification@connect');
 Route::get('/login', function(){
     header('Location: http://epoka.local/');
@@ -21,6 +24,9 @@ Route::get('/login', function(){
 Route::get('/disconnect', function(){
     session_start();
     unset($_SESSION['login']);
+    unset($_SESSION['nom']);
+    unset($_SESSION['view_missions']);
+    unset($_SESSION['view-paiements']);
     header('Location: /');
     exit();
 });
@@ -31,9 +37,7 @@ Route::get('/missions','Missions@index');
 Route::get('/missions/valider/{id}','Missions@valider');
 Route::get('/paiement-frais','Missions@paiement_index');
 Route::get('/paiement-frais/payer/{id}','Missions@valider_paiement');
-Route::get('/settings', function (){
-    return view('settings');
-});
+Route::get('/settings', 'Settings@index');
 Route::get('/settings/distances', function (){
     return view('settings-distances');
 });
