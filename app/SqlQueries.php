@@ -29,6 +29,10 @@ class SqlQueries extends Model
         $query = DB::table('utilisateurs')->where('user_id',$login)->first();
         return $query;
     }
+    public static function getSettings(){
+        $query = DB::table('settings')->first();
+        return $query;
+    }
     public static function getDistance(){
         $query = DB::select('SELECT V1.ville_nom_reel AS ville1, V2.ville_nom_reel AS ville2, dist_km FROM distance, villes_france_free AS V1, villes_france_free AS V2 WHERE dist_ville_1 = V1.ville_id AND dist_ville_2 = V2.ville_id');
         return $query;
@@ -46,5 +50,9 @@ class SqlQueries extends Model
                 ->insert([
                     ['dist_ville_1' => $ville1, 'dist_ville_2' => $ville2, 'dist_km' => $km]
                 ]);
+    }
+    public static function getMontantPaiements($idMission){
+        $query = DB::select("SELECT user_nom, user_prenom, miss_debut, miss_fin, villes_france_free.ville_nom_reel, miss_id, isValidate, isRembour, id.ville_id AS idVille1, villes_france_free.ville_id as idVille2, dist_km FROM mission, utilisateurs, villes_france_free, distance, agence, villes_france_free AS id WHERE miss_ville_id = villes_france_free.ville_id AND mission.user_id = utilisateurs.user_id AND user_agence = ag_id AND id.ville_id = ag_ville AND dist_ville_1 = id.ville_id AND dist_ville_2 = villes_france_free.ville_id AND isValidate = 1 AND miss_id=$idMission");
+        return $query;
     }
 }

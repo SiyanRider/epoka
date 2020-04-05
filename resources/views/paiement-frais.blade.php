@@ -45,23 +45,27 @@
             <tbody>
             @if (isset($liste_missions))
                 @foreach ($liste_missions as $missions)
+                {{ $id = $missions -> miss_id}}
                     <tr class="odd" role="row">
                     <td class="sorting_1">{{ $missions -> user_nom }}</td>
                     <td>{{ $missions -> user_prenom }}</td>
                     <td> {{ $missions -> miss_debut }}</td>
                     <td> {{ $missions -> miss_fin }}</td>
                     <td>{{ $missions -> ville_nom_reel }}</td>
-                    <td>/</td>
+                    <td>{{ $listeMontant[$missions -> miss_id] }}</td>
                     <td>
                     @if( $missions -> isRembour == 0)
-                    <span class="button"><a href='/paiement-frais/payer/{{ $missions -> miss_id }}' class="button-link">Valider</a></span>
+                        @if ($listeMontant[$missions -> miss_id] == "")
+                        Distance non définies
+                        @else
+                        <span class="button"><a href='/paiement-frais/payer/{{ $missions -> miss_id }}' class="button-link">Valider</a></span>
+                        @endif
                     @else
                     Validée et Remboursée
                     @endif
                     </td></tr>
                 @endforeach
             @endif
-<!--Works : https://stackoverflow.com/questions/30555747/laravel-5-passing-database-query-from-controller-to-view -->
             </table>
 </div>
 </div>
