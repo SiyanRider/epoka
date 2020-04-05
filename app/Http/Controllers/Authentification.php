@@ -17,7 +17,7 @@ public function connect(){
         $user = SqlQueries::connect($login);
         if ($user){
             $passwd = $user -> user_passwd;
-            if ($passwd == $password){
+            if (password_verify($password, $passwd)){
                 session_start();
                 $_SESSION['login'] = $login;
                 $_SESSION['view_missions'] = $user->view_missions;
