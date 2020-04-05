@@ -26,10 +26,10 @@
         <div class="card-body">
         <br/><br/><br/>
 <div class="authpanel">
-    <img src="distance.png" height="150" /><a href="distance" class="active">Parametrez la distance entres deux villes</a>
+    <img src="distance.png" height="150" /><a href="/settings/distances" class="active">Parametrez la distance entres deux villes</a>
 </div>
 <div class="authpanel">
-    <img src="prix.png" width="200" height="200" /><a href="prix" class="active">Parametrez les indemnités</a>
+    <img src="prix.png" width="200" height="200" /><a href="/settings/prix" class="active">Parametrez les indemnités</a>
 </div>
         </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>

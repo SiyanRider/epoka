@@ -3,7 +3,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\User;
-use Illuminate\Database\Eloquent\Model;
 use App\SqlQueries as SqlQueries;
 use DB;
 
@@ -41,7 +40,8 @@ class Missions extends Controller
         if (isset($_SESSION['login'])){
             if ($_SESSION['view_paiements'] == '1'){
                 $liste_missions = SqlQueries::getPaiements();
-                return view('paiement-frais', compact('liste_missions'));
+                $settings = SqlQueries::getSettings();
+                return view('paiement-frais', compact('liste_missions','settings'));
             }
             else{
                 header('Location: /forbiden-error');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\User;
 use DB;
+use App\SqlQueries;
 
 class Settings extends Controller
 {
@@ -59,5 +60,47 @@ class Settings extends Controller
             header('Location: /');
             exit();
         }
+    }
+    public function indexDistance(){
+        session_start();
+        if (isset($_SESSION['login'])){
+            if ($_SESSION['view_paiements'] == '1'){
+                $agences = SqlQueries::getAgences();
+                $villes = SqlQueries::getVillesMissions();
+                $distances = SqlQueries::getDistance();
+
+                return view('settings-distances', compact('agences','villes','distances'));
+            }
+            else{
+                return view('forbiden-error');
+            }
+        }
+        else{
+            header('Location : /');
+            exit();
+        }
+    }
+    public function setDistance(){
+        session_start();
+        if (isset($_SESSION['login'])){
+            if ($_SESSION['view_paiements'] == '1'){
+                $ville1 = $_POST['ville1'];
+                $ville2= $_POST['ville2'];
+                $km = $_POST['km'];
+
+                SqlQueries::setDistance($ville1,$ville2,$km);
+                header('Location: /settings/distances');
+                exit();
+            }
+            else{
+                header('Location : /forbiden-error');
+                exit();
+            }
+        }
+        else{
+            header('Location : /');
+            exit();
+        }
+
     }
 }

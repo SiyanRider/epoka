@@ -1,18 +1,20 @@
 <?php
 namespace App\Http\Controllers;
 
+
 use App\Http\Controllers\Controller;
 use App\User;
 use DB;
+use App\SqlQueries;
 
 class Authentification extends Controller
 {
-public function connect()
-    {
+    
+public function connect(){
         $login = $_POST['login'];
         $password = $_POST['passwd'];
 
-        $user = DB::table('utilisateurs')->where('user_id',$login)->first();
+        $user = SqlQueries::connect($login);
         if ($user){
             $passwd = $user -> user_passwd;
             if ($passwd == $password){
@@ -40,6 +42,15 @@ public function connect()
             exit();
         }
     
+    }
+    public function logout(){
+        session_start();
+        unset($_SESSION['login']);
+        unset($_SESSION['nom']);
+        unset($_SESSION['view_missions']);
+        unset($_SESSION['view-paiements']);
+        header('Location: /');
+        exit();
     }
 }
 ?>

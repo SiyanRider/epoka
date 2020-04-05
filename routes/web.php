@@ -21,15 +21,7 @@ Route::get('/login', function(){
     header('Location: http://epoka.local/');
     exit();
 });
-Route::get('/disconnect', function(){
-    session_start();
-    unset($_SESSION['login']);
-    unset($_SESSION['nom']);
-    unset($_SESSION['view_missions']);
-    unset($_SESSION['view-paiements']);
-    header('Location: /');
-    exit();
-});
+Route::get('/disconnect','Authentification@logout');
 Route::get('/test',function (){
     return 'test OK :D';
 });
@@ -38,9 +30,8 @@ Route::get('/missions/valider/{id}','Missions@valider');
 Route::get('/paiement-frais','Missions@paiement_index');
 Route::get('/paiement-frais/payer/{id}','Missions@valider_paiement');
 Route::get('/settings', 'Settings@index');
-Route::get('/settings/distances', function (){
-    return view('settings-distances');
-});
+Route::get('/settings/distances', 'Settings@indexDistance');
 Route::get('/settings/prix', 'Settings@prixKilometre');
 Route::post('/settings/prix/modify', 'Settings@modify');
+Route::post('/settings/distances/set-distance', 'Settings@setDistance');
 ?>

@@ -52,9 +52,13 @@
                     <td>{{ $missions -> ville_nom_reel }}</td>
                     <td>
                     @if( $missions -> isValidate == 0)
-                    <span class="button"><a href='/missions/valider/{{ $missions -> miss_id }}'>Valider</a></span>
+                    <span class="button"><a href='/missions/valider/{{ $missions -> miss_id }}' class="button-link">Valider</a></span>
                     @else
-                    Validée
+                    @if ($missions -> isRembour==0)
+                    Validée mais non remboursée
+                    @else
+                    Validée et remboursée
+                    @endif
                     @endif
                     </td></tr>
                 @endforeach
